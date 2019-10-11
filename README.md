@@ -1,24 +1,24 @@
-# README
+# Image Gallery
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Building the project
 
-Things you may want to cover:
+1. Ensure you have the correct version of ruby installed (check .ruby-version).
+2. Run `bundle install`
 
-* Ruby version
+## Testing
 
-* System dependencies
+To run the tests simply:
 
-* Configuration
+```
+$ bin/test
+```
 
-* Database creation
+## Dependencies
 
-* Database initialization
+### MongoDb
 
-* How to run the test suite
+Mongodb must be running, if you have docker installed simply run:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ bin/mongo
+```

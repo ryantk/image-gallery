@@ -6,4 +6,12 @@ class UserLookingToRegister < OpenStruct
       password_confirmation: 'ValidP4ssword'
     )
   end
+
+  def self.with_invalid_email_and_missing_password
+    new(
+      email: 'jenny.com',
+      password: '', 
+      password_confirmation: ''
+    )
+  end
 end

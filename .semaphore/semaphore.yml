@@ -1,0 +1,22 @@
+version: v1.0
+name: First pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      prologue:
+        commands:
+          - checkout
+
+          - sem-service start mongodb
+          - sudo apt install mongodb-clients -y
+          - echo 'db.createUser( {user:"username", pwd:"password", roles:[], mechanisms:["SCRAM-SHA-1"]  } )' | mongo s2
+
+          - bundle install
+      jobs:
+        - name: rspec
+          commands:
+            - bundle exec rspec --format documentation

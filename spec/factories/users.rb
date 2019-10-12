@@ -1,6 +1,8 @@
+require 'securerandom'
+
 FactoryBot.define do
   factory :user do
-    sequence(:email) { |n| "user#{n}@example.com" }
+    email { "user-#{SecureRandom.uuid}@example.com" }
     password { 'ValidPassword' }
     password_confirmation { 'ValidPassword' }
 

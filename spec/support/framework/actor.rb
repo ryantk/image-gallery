@@ -6,4 +6,9 @@ class Actor < SimpleDelegator
     page_to_see_error_on = args.delete(:on)
     page_to_see_error_on.has_error?(message)
   end
+
+  def shown?(content, args={})
+    page_to_see_error_on = args.delete(:on)
+    page_to_see_error_on.has_content?(content)
+  end
 end

@@ -8,8 +8,4 @@ class Page
   def has_message?(message)
     page.has_content?(message)
   end
-
-  def showing_user_as_logged_in?
-    has_message?('Signed in successfully')   
-  end
 end

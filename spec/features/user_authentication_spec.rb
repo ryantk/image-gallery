@@ -7,7 +7,7 @@ feature 'User can log in' do
 
     LogIn.as(james)
 
-    expect(the_page).to be_showing_user_as_logged_in
+    expect(james).to be_notified_of_successful_login_on(the_page)
   end
 
 end

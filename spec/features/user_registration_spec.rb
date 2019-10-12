@@ -15,9 +15,9 @@ feature 'Visiting user can register for an account' do
 
     RegisterForAnAccount.as(jenny)
 
-    expect(the_page).to have_error('Email is invalid')
-    expect(the_page).to have_error("Password can't be blank")
     expect(jenny).not_to have_an_account_created
+    expect(jenny).to be_shown_error('Email is invalid', on: the_page)
+    expect(jenny).to be_shown_error("Password can't be blank", on: the_page)
   end
 
 end

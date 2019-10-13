@@ -21,8 +21,10 @@ class Actor
     abilities[ability_type]
   end
 
-  def attempts_to(action)
-    action.perform_as(self)
+  def attempts_to(*actions)
+    Array(actions).each do |action|
+      action.perform_as(self)
+    end
   end
 end
 

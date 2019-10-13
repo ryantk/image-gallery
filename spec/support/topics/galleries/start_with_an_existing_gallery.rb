@@ -8,6 +8,8 @@ class StartWithAnExistingGallery
   end
 
   def perform_as(actor)
-    actor.attempts_to(CreateANewGallery.called(@title))
+    # TODO: not sure i should be tying this to StartWithAnExistingUser
+    user = StartWithAnExistingUser.as(actor).user
+    user.galleries.create(title: @title)
   end
 end

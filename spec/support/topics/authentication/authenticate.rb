@@ -1,15 +1,17 @@
 class Authenticate
   def self.with_correct_details
     user = FactoryBot.create(:user)
-    new(user.email, user.password)
+    new(user)
   end
 
+  attr_reader :user
   attr_reader :email
   attr_reader :password
 
-  def initialize(email, password)
-    @email = email
-    @password = password
+  def initialize(user)
+    @user = user
+    @email = user.email
+    @password = user.password
   end
 
   def self.as(actor)

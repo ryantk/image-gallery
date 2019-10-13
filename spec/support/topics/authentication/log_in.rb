@@ -1,4 +1,8 @@
 class LogIn < Action
+  def self.with_credentials
+    new
+  end
+
   def perform_as(actor)
     visit '/'
     click_link 'Log in'

@@ -2,10 +2,7 @@ require 'rails_helper'
 
 feature 'Users can create, edit and delete photo galleries' do
 
-  let(:jane) { 
-    Actor.named('Jane')
-      .who_can(Authenticate.with_correct_details) 
-  }
+  let(:jane) { Actor.named('Jane').who_will(StartWithExistingUser.already_logged_in) }
 
   scenario 'Logged in user creates new gallery' do
     alice = ALoggedInUser.who_is(LookingToCreateAGallery.with_title('My first gallery'))
@@ -27,7 +24,10 @@ feature 'Users can create, edit and delete photo galleries' do
   scenario 'User with existing gallery may delete it' do
     jane.will(StartWithAnExistingGallery.called('My existing gallery'))
 
-    jane.attempts_to(DeleteAGallery.called('My existing gallery'))
+    jane.attempts_to(
+      LogIn.with_credentials,
+      DeleteAGallery.called('My existing gallery')
+    )
 
     expect(jane).not_to see_any(Galleries.listed)
   end

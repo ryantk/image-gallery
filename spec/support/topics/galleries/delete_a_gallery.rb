@@ -1,4 +1,4 @@
-class CreateANewGallery
+class DeleteAGallery < Action
   def self.called(title)
     new(title)
   end
@@ -9,10 +9,8 @@ class CreateANewGallery
 
   def perform_as(actor)
     visit '/'
-    click_link 'Create new gallery'
-
-    gallery = CreateGalleryPage.new
-    gallery.title = @title
-    gallery.create
+    click_link 'View Galleries'
+    click_link @title
+    click_button 'Delete gallery'
   end
 end

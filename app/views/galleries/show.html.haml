@@ -1,1 +1,3 @@
 %h2= @gallery.title
+%ul
+  %li= button_to 'Delete gallery', gallery_path(@gallery), method: :delete

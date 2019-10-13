@@ -1,3 +1,3 @@
 class Action
-  extend Capybara::DSL
+  include Capybara::DSL
 end

@@ -10,6 +10,10 @@ class GalleriesController < ApplicationController
     end
   end
 
+  def index
+    @galleries = current_user.galleries
+  end
+
   def show
     @gallery = Gallery.find(params[:id])
   end

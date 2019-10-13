@@ -1,0 +1,5 @@
+%h2 Galleries
+
+%ul
+  - @galleries.each do |gallery|
+    %li= link_to gallery.title, gallery

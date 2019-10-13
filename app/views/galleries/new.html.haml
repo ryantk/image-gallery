@@ -1,7 +1,13 @@
-%h2 Create a gallery
+.card
+  .card-body
+    .card-title
+      %h2 Create a gallery
 
-= form_with model: @gallery do |f|
-  %label 
-    Title
-    = f.text_field :title
-  = f.submit 'Create gallery'
+    = form_with model: @gallery do |f|
+      .form-group
+        %label 
+          Title
+          = f.text_field :title, class: 'form-control'
+
+      .form-group
+        = f.submit 'Create gallery', class: 'btn btn-primary'

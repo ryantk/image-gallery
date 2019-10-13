@@ -3,8 +3,7 @@ class ALoggedInUser < Actor
     user = create(:user)
     login_as(user)
 
-    # just return the other role for now
-    # as it doesnt need the user
+    other_actor_role.user = user
     other_actor_role
   end
 end

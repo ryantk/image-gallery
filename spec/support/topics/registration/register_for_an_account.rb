@@ -1,7 +1,9 @@
-class RegisterForAnAccount
+class RegisterForAnAccount < Action
   def self.as(user)
+    visit '/'
+    click_link 'Register'
+
     registration = RegistrationPage.new
-    registration.visit '/account/registration'
     registration.email = user.email
     registration.password = user.password
     registration.password_confirmation = user.password_confirmation

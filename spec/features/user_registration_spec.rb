@@ -7,7 +7,7 @@ feature 'Visiting user can register for an account' do
 
     RegisterForAnAccount.as(ryan)
 
-    expect(a_new_user_account).to have_been_created_for(ryan)
+    expect(ryan).to have_an_account_created
   end
 
   scenario 'Registering with invalid details shows an error' do
@@ -15,9 +15,9 @@ feature 'Visiting user can register for an account' do
 
     RegisterForAnAccount.as(jenny)
 
-    expect(the_page).to have_error('Email is invalid')
-    expect(the_page).to have_error("Password can't be blank")
-    expect(a_new_user_account).not_to have_been_created_for(jenny)
+    expect(jenny).not_to have_an_account_created
+    expect(jenny).to be_shown_error('Email is invalid', on: the_page)
+    expect(jenny).to be_shown_error("Password can't be blank", on: the_page)
   end
 
 end

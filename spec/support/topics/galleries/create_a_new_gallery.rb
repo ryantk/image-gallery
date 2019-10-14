@@ -1,10 +1,10 @@
 class CreateANewGallery < Action
-  def self.as(user)
+  def self.with_title(title)
     visit '/'
     click_link 'Create new gallery'
 
     gallery = CreateGalleryPage.new
-    gallery.title = user.gallery_title
+    gallery.title = title
     gallery.create
   end
 end

@@ -28,6 +28,8 @@ Warden.test_mode!
 # Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   config.after do
     Warden.test_reset!
   end

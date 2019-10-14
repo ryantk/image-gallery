@@ -1,6 +1,7 @@
 class Actor < SimpleDelegator
   extend FactoryBot::Syntax::Methods
   extend Warden::Test::Helpers
+  include Warden::Test::Helpers
 
   attr_accessor :user
   

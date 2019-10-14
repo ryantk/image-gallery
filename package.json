@@ -2,7 +2,9 @@
   "name": "image-gallery",
   "private": true,
   "dependencies": {
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.14.7"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2"

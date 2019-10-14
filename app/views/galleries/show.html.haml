@@ -1,2 +1,8 @@
-%h2= @gallery.title
-= button_to "Delete gallery", gallery_path(@gallery), method: :delete
+- content_for :title do
+  = @gallery.title
+
+- content_for :right_hand_toolbar do
+  = button_to gallery_path(@gallery), method: :delete, class: 'btn btn-light', title: 'Delete this gallery' do
+    <i class="far fa-trash-alt"></i>
+    &nbsp;
+    Delete

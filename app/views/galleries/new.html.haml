@@ -1,13 +1,12 @@
-.card
-  .card-body
-    .card-title
-      %h2 Create a gallery
+- content_for :title do
+  New Gallery
 
-    = form_with model: @gallery do |f|
-      .form-group
-        %label 
-          Title
-          = f.text_field :title, class: 'form-control'
+.mt-5
+  = form_with model: @gallery do |f|
+    .form-group
+      %label 
+        Title
+        = f.text_field :title, class: 'form-control'
 
-      .form-group
-        = f.submit 'Create gallery', class: 'btn btn-primary'
+    .form-group
+      = f.submit 'Create gallery', class: 'btn btn-primary', style: 'background-color: #2980b9'

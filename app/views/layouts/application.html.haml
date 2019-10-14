@@ -7,18 +7,38 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    <link href="https://fonts.googleapis.com/css?family=Be+Vietnam:700&display=swap" rel="stylesheet">
   %body
-    .container
+    .navbar.navbar-dark.navbar-expand-lg{ style: 'background-color: #c0392b;' }
+      %a.navbar-brand{ href: root_path }
+        %i.fas.fa-bolt
+        %i.fas.fa-camera-retro
+        %i.fas.fa-bolt
+
+      %button.navbar-toggler{ data: { toggle: "collapse", target: "#navbarSupportedContent" }, aria: { label: "Toggle navigation" }}
+        %span.navbar-toggler-icon
+    
+      .collapse.navbar-collapse#navbarSupportedContent
+        %ul.navbar-nav
+          - if user_signed_in?
+            - if request.path != galleries_path
+              %li.nav-item.active= link_to 'View Galleries', galleries_path, class: 'nav-link'
+
+        %ul.navbar-nav.ml-auto
+          - if user_signed_in?
+            %li.nav-item= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link'
+          - else
+            %li.nav-item= link_to 'Log in', new_user_session_path, class: 'nav-link'
+            %li.nav-item= link_to 'Register', new_user_registration_path, class: 'nav-link'
+
+    - if content_for(:title) || content_for(:right_hand_toolbar)
+      %header.w-100.p-3.text-light{ style: 'background-color: #e74c3c; font-family: "Be Vietnam", sans-serif' }
+        
+        .w-25.float-right.mt-10.mt-2.text-right= content_for(:right_hand_toolbar)
+        %h1= content_for(:title)
+    
+    .container-fluid
       - flash.each do |key, value|
         %div{ class: "alert alert-#{key}" }= value
       
-      %nav
-        %ul
-          %li= link_to 'Home', root_path
-          - if user_signed_in?
-            %li= link_to 'Log out', destroy_user_session_path, method: :delete
-          - else
-            %li= link_to 'Log in', new_user_session_path
-            %li= link_to 'Register', new_user_registration_path
-
       = yield

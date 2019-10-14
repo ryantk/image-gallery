@@ -1,9 +1,8 @@
 class DeleteAGallery < Action
   def self.with_title(title)
     visit '/'
-    save_and_open_page
-    click_link 'View galleries'
+    click_link 'View Galleries'
     click_link title
-    click_button 'Delete gallery'
+    click_button 'Delete this gallery'
   end
 end

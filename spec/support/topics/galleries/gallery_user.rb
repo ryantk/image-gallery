@@ -1,4 +1,8 @@
 class GalleryUser < RegisteredUser
+  def self.who_is_not_logged_in
+    new build(:user)
+  end
+
   def self.with_an_existing_gallery_named(title)
     user = with_correct_login_details
     user.galleries.create(title: title)

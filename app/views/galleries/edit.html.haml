@@ -1,0 +1,12 @@
+- content_for :title do
+  Edit: #{@gallery.title}
+
+.mt-5
+  = form_with model: @gallery do |f|
+    .form-group
+      %label 
+        Title
+        = f.text_field :title, class: 'form-control'
+
+    .form-group
+      = f.submit 'Save changes', class: 'btn btn-primary', style: 'background-color: #2980b9'

@@ -1,4 +1,6 @@
 class GalleriesController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @gallery = Gallery.new
   end
@@ -18,6 +20,19 @@ class GalleriesController < ApplicationController
 
   def show
     @gallery = Gallery.find(params[:id])
+  end
+
+  def edit
+    @gallery = Gallery.find(params[:id])
+  end
+
+  def update
+    @gallery = current_user.galleries.find(params[:id])
+    if @gallery.update(gallery_params)
+      redirect_to @gallery
+    else
+      render :edit
+    end
   end
 
   def destroy

@@ -2,7 +2,14 @@
   = @gallery.title
 
 - content_for :right_hand_toolbar do
-  = button_to gallery_path(@gallery), method: :delete, class: 'btn btn-light', title: 'Delete this gallery' do
-    <i class="far fa-trash-alt"></i>
-    &nbsp;
-    Delete
+  .float-right
+    = button_to gallery_path(@gallery), method: :delete, class: 'btn btn-light', title: 'Delete this gallery' do
+      %i.far.fa-trash-alt
+      &nbsp;
+      Delete
+
+  .float-right.mr-2
+    = link_to edit_gallery_path(@gallery), class: 'btn btn-light', title: 'Edit this gallery' do
+      %i.fas.fa-edit
+      &nbsp;
+      Edit

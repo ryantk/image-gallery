@@ -33,12 +33,14 @@
 
     - if content_for(:title) || content_for(:right_hand_toolbar)
       %header.w-100.p-3.text-light{ style: 'background-color: #e74c3c; font-family: "Be Vietnam", sans-serif' }
-        
-        .w-25.float-right.mt-10.mt-2.text-right= content_for(:right_hand_toolbar)
-        %h1= content_for(:title)
+        .container
+
+          .w-25.float-right.mt-10.mt-2.text-right= content_for(:right_hand_toolbar)
+          %h1= content_for(:title)
     
-    .container-fluid
-      - flash.each do |key, value|
-        %div{ class: "alert alert-#{key}" }= value
-      
-      = yield
+    .container
+      .mt-5
+        - flash.each do |key, value|
+          %div{ class: "alert alert-#{key}" }= value
+        
+        = yield

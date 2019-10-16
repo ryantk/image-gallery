@@ -13,3 +13,10 @@
       %i.fas.fa-edit
       &nbsp;
       Edit
+
+.card.bg-light
+  .card-body
+    %h4.card-title Upload a photo
+    = form_with(url: gallery_photos_path(@gallery), method: :post) do |f|
+      = f.file_field :file
+      = f.submit 'Upload'

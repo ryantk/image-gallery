@@ -21,9 +21,9 @@
       .collapse.navbar-collapse#navbarSupportedContent
         %ul.navbar-nav
           - if user_signed_in?
-            - if request.path != galleries_path
+            - if request.path.in?(['/',  public_galleries_path])
               %li.nav-item.active= link_to 'Your Galleries', galleries_path, class: 'nav-link'
-            - unless request.path.in?(['/',  public_galleries_path])
+            - else
               %li.nav-item.active= link_to 'Browse Galleries', public_galleries_path, class: 'nav-link'
         %ul.navbar-nav.ml-auto
           - if user_signed_in?

@@ -2,11 +2,13 @@ require 'rails_helper'
 
 feature 'Users can create, edit and delete photo galleries' do
 
-  scenario 'Non logged in users cannot create a new gallery' do
-    gerald = GalleryUser.who_is_not_logged_in
+  scenario 'Unauthenticated users cannot create galleries' do
+    galleries_list_page = GalleriesListPage.new
+    galleries_list_page.navigate_to_public
+    expect(galleries_list_page).not_to have_link('Create new gallery')
 
-    expect { CreateANewGallery.with_title('My first gallery') }.to raise_error
-    expect(gerald).not_to have_any_galleries
+    visit new_gallery_path
+    expect(current_path).to eq(new_user_session_path)
   end
 
   scenario 'Logged in user creates new gallery' do

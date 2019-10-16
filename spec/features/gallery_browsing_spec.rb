@@ -8,13 +8,29 @@ feature 'All users can view photo galleries' do
     dobby = GalleryUser.with_an_existing_gallery_named('Corfu 06')
     kate = GalleryUser.who_is_logged_in
 
-    visit '/'
+    galleries_list_page = GalleriesListPage.new
+    galleries_list_page.navigate_to_public
 
     expect(kate).to be_able_to_view_galleries(
       'Photos A',
       'Great gallery',
       'Corfu 06'
     )
+  end
+
+  scenario 'Unauthenticated users can view all galleries' do
+    create(:gallery, title: 'My photos')
+    create(:gallery, title: 'Ace moments')
+    create(:gallery, title: '1st Birthday')
+
+    galleries_list_page = GalleriesListPage.new
+    galleries_list_page.navigate_to_public
+
+    expect(galleries_list_page.visible_galleries).to eq([
+      'My photos',
+      'Ace moments',
+      '1st Birthday'
+    ])
   end
   
   scenario 'Users can view their own galleries only optionally' do

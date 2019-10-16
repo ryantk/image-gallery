@@ -2,10 +2,7 @@
   Browse Galleries
 
 - content_for :right_hand_toolbar do
-  = link_to new_gallery_path, class: 'btn btn-light', title: 'Create new gallery' do
-    %i.fas.fa-plus
-    &nbsp;
-    Gallery
+  = render 'galleries/new_gallery_button'
 
 
 = render 'galleries/list'

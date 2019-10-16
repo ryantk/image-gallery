@@ -1,7 +1,8 @@
 class EditGallery < Action
   def self.with_title(title)
-    visit '/'
-    click_link 'View Galleries'
+    galleries_page = GalleriesListPage.new
+    galleries_page.navigate_to_personal
+    
     click_link title
     click_link 'Edit'
     new

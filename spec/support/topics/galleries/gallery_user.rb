@@ -16,4 +16,9 @@ class GalleryUser < RegisteredUser
   def has_any_galleries?
     galleries.any?
   end
+
+  def able_to_view_galleries?(*gallery_names)
+    gallery_list_page = GalleriesListPage.new
+    gallery_list_page.visible_galleries == Array(gallery_names)
+  end
 end

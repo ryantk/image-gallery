@@ -25,3 +25,7 @@
 
 storage/*
 !storage/.keep
+public/uploads/*
+!public/uploads/.keep
+public/tmp/*
+!public/tmp/.keep

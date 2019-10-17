@@ -1,36 +1,33 @@
 require 'rails_helper'
 
-
-# 
-#  <ActionDispatch::Http::UploadedFile:0x00007ff7138bd9b0 
-#  @tempfile=#<Tempfile:/var/folders/zc/nrgwhs816lv0yqtgk8s40mnw0000gp/T/RackMultipart20191016-43836-1pcib96.png>, 
-#  @original_filename="xmas card grace.png", 
-#  @content_type="image/png", 
-#  @headers="Content-Disposition: form-data; name=\"file\"; filename=\"xmas card grace.png\"\r\nContent-Type: image/png\r\n">
-
 describe UploadPhoto do
 
-  let(:gallery) { Gallery.new }
+  let(:gallery) { create(:gallery) }
 
-  let(:temp_file) {
-    mock(
-      tempfile: File.open(Rails.root.join('fixtures/hollywood.jpg')),
-      original_filename: 'hollywood.jpg',
-      content_type: 'image/jpeg'
-    )
-  }
+  let(:temp_file) { fixture_file_upload(Rails.root.join('spec/fixtures/file/hollywood.jpg'), 'image/jpeg') }
 
   let(:upload_photo) { UploadPhoto.new(temp_file) }
 
-
   describe '#upload_and_attach_to' do
+    before { upload_photo.upload_and_attach_to(gallery) }
+
     it 'saves the file to the storage folder' do
-      upload_photo.upload_and_attach_to(gallery)
-
-      photo_to_upload = temp_file.tempfile
-      photo_on_server = File.open(gallery.photos.first.file_path)
-
+      photo_to_upload = Digest::SHA1.file temp_file.tempfile
+      photo_on_server = Digest::SHA1.file Photo.upload_file_to_path(gallery.photos.first.filename)
+      
       expect(photo_to_upload).to eq(photo_on_server)
+    end
+
+    it 'records details of the photo into a Photo object' do
+      photo = gallery.photos.first
+      expect(photo.original_filename).to eq('hollywood.jpg')
+      expect(photo.uploaded_at).to within(1.second).of(DateTime.now)
+    end
+
+    it 'creates a resized thumbnail of the original image' do
+      photo = gallery.photos.first
+      thumbnail = MiniMagick::Image.open(Photo.upload_file_to_path(photo.thumbnail))
+      expect(thumbnail.width).to eq(650)
     end
   end
 

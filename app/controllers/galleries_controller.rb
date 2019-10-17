@@ -2,7 +2,7 @@ class GalleriesController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @gallery = Gallery.new
+    @gallery = current_user.galleries.new
   end
 
   def create
@@ -20,10 +20,11 @@ class GalleriesController < ApplicationController
 
   def show
     @gallery = Gallery.find(params[:id])
+    @photos = @gallery.photos
   end
 
   def edit
-    @gallery = Gallery.find(params[:id])
+    @gallery = current_user.galleries.find(params[:id])
   end
 
   def update
@@ -36,7 +37,7 @@ class GalleriesController < ApplicationController
   end
 
   def destroy
-    @gallery = Gallery.find(params[:id])
+    @gallery = current_user.galleries.find(params[:id])
     if @gallery.destroy
       redirect_to galleries_path
     else

@@ -21,4 +21,8 @@ class GalleryUser < RegisteredUser
     gallery_list_page = GalleriesListPage.new
     gallery_list_page.visible_galleries == Array(gallery_names)
   end
+
+  def shown_photo?(filename)
+    Page.new.find('.photo-filename', text: filename).present?
+  end
 end

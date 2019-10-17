@@ -4,33 +4,43 @@ class UploadPhoto
   end
 
   def upload_and_attach_to(gallery)
+    File.binwrite(main_upload_file_path, uploaded_file.read)
+    make_thumbnail
 
-    # generate file details
-
-    # upload main file
-
-    # generate thumbnail
-
-
-    # file = params[:file]
-    # type = file.original_filename.split('.').last
-
-    # new_filename = [SecureRandom.uuid, type].join(".")
-
-    # photo.file_path = File.open(Rails.root.join('storage', new_filename))
-
-    # photo.filename = file.original_filename
-    # photo.uploaded_at = DateTime.now
+    gallery.photos.create(
+      original_filename: uploaded_file.original_filename,
+      filename: main_upload_filename,
+      thumbnail: thumbnail_filename,
+      uploaded_at: DateTime.now
+    )
   end
 
   private
   attr_reader :uploaded_file
 
-  def file_path
-    Rails.root.join('storage', new_filename)
+  def main_upload_file_path
+    Photo.upload_file_to_path(main_upload_filename)
   end
 
-  def new_filename
-    "#{SecureRandom.uuid}.#{File.extname(uploaded_file.original_filename)}"
+  def main_upload_filename
+    @main_upload_filename ||= generate_filename
+  end
+
+  def thumbnail_file_path
+    Photo.upload_file_to_path(thumbnail_filename)
+  end
+
+  def thumbnail_filename
+    @thumbnail_filename ||= generate_filename
+  end
+
+  def generate_filename
+    "#{SecureRandom.uuid}#{File.extname(uploaded_file.original_filename)}"
+  end
+
+  def make_thumbnail
+    image = MiniMagick::Image.open(uploaded_file.tempfile.path)
+    image.resize "650x650"
+    image.write thumbnail_file_path
   end
 end

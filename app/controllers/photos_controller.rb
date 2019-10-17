@@ -1,13 +1,13 @@
 class PhotosController < ApplicationController
 
   def create
-    debugger
+    gallery = Gallery.find(params[:gallery_id])
 
-    gallery = Gallery.find(params[:folder_id])
-
-    if gallery.upload_photo(params[:file])
-
+    unless gallery.upload_photo(params[:file])
+      flash[:alert] = "Failed to save upload, please try again in a moment."
     end
+
+    redirect_to gallery
   end
 
 end

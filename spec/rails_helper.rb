@@ -12,7 +12,6 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'support/testing_framework'
 Warden.test_mode!
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -30,6 +29,7 @@ Warden.test_mode!
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  config.include ActionDispatch::TestProcess
 
   config.after do
     Warden.test_reset!
@@ -54,15 +54,16 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean_with(:truncation)
+  config.before(:each) do
+    DatabaseCleaner.start
   end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.after(:suite) do
+    `cd public/tmp && rm *.jpg`
   end
 end
 

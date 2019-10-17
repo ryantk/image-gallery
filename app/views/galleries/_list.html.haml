@@ -1,6 +1,7 @@
-- @galleries.each do |gallery|
-  .card.w-25.float-left.ml-4
-    %img.card-img-top{ src: 'http://via.placeholder.com/640x360' } 
-    .card-body
-      %h5.card-title.gallery-title= link_to gallery.title, gallery
-      -# %p Created by: #{gallery.user.email}
+.card-columns
+  - @galleries.each do |gallery|
+    .card
+      %img.card-img-top{ src: showcase_image_src(gallery) } 
+      .card-body
+        %h5.card-title.gallery-title= link_to gallery.title, gallery
+        -# %p Created by: #{gallery.user.username}

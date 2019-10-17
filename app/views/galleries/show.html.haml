@@ -14,9 +14,20 @@
       &nbsp;
       Edit
 
-.card.bg-light
-  .card-body
-    %h4.card-title Upload a photo
-    = form_with(url: gallery_photos_path(@gallery), method: :post) do |f|
-      = f.file_field :file
-      = f.submit 'Upload'
+- if current_user == @gallery.user
+  .card.bg-light
+    .card-body
+      %h4.card-title Upload a photo
+      = form_with(url: gallery_photos_path(@gallery), method: :post) do |f|
+        = f.file_field :file, title: 'Add photo to gallery'
+        = f.submit 'Upload'
+
+.mt-5
+
+.card-columns
+  - @photos.each do |photo|
+    .card
+      = gallery_image(photo)
+      -# %img.card-img-top{ src: gallery_image_src(photo) } 
+      .card-body
+        %h5.card-title.photo-filename= photo.original_filename

@@ -1,0 +1,11 @@
+development:
+  save_path: <%= Rails.root.join("public/uploads") %>
+  url_path: "/uploads"
+
+production:
+  save_path: <%= Rails.root.join("public/uploads") %>
+  url_path: "/uploads"
+
+test:
+  save_path: <%= Rails.root.join("public/tmp") %>  
+  url_path: "/tmp"

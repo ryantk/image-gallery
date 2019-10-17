@@ -4,6 +4,7 @@
 
 1. Ensure you have the correct version of ruby installed (check .ruby-version).
 2. Run `bundle install`
+3. Run `npm install`
 3. Ensure you have `iamgemagick` installed on your system.
 
 ### More setup

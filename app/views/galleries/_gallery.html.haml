@@ -1,0 +1,5 @@
+.card
+  %img.card-img-top{ src: showcase_image_src(gallery) } 
+  .card-body
+    %h5.card-title.gallery-title= link_to gallery.title, gallery
+    -# %p Created by: #{gallery.user.username}

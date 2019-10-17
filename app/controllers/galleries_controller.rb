@@ -1,5 +1,5 @@
 class GalleriesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def new
     @gallery = current_user.galleries.new

@@ -1,7 +1,7 @@
-.card-columns
-  - @galleries.each do |gallery|
-    .card
-      %img.card-img-top{ src: showcase_image_src(gallery) } 
-      .card-body
-        %h5.card-title.gallery-title= link_to gallery.title, gallery
-        -# %p Created by: #{gallery.user.username}
+- if @galleries.any?
+  .card-columns
+    = render @galleries
+
+- else
+
+  %p No galleries to browse :( #{link_to 'Why not create one?', new_gallery_path, class: 'btn btn-link' if user_signed_in?}

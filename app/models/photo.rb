@@ -14,6 +14,6 @@ class Photo
   end
 
   def self.access_file_url_path(filename)
-    "#{Rails.configuration.uploads[:url_path]}/#{filename}"
+    "#{Rails.configuration.uploads['url_path']}/#{filename}"
   end
 end

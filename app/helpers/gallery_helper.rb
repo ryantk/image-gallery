@@ -1,5 +1,9 @@
 module GalleryHelper
 
+  def uploaded_at(photo)
+    photo.uploaded_at.strftime("%D at %H:%M")
+  end
+
   def showcase_image_src(gallery)
     gallery.photos.any? ? gallery_thumbnail_src(gallery.photos.first) : 'http://via.placeholder.com/640x360'
   end

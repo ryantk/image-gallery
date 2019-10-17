@@ -25,9 +25,4 @@
 .mt-5
 
 .card-columns
-  - @photos.each do |photo|
-    .card
-      = gallery_image(photo)
-      -# %img.card-img-top{ src: gallery_image_src(photo) } 
-      .card-body
-        %h5.card-title.photo-filename= photo.original_filename
+  = render 'photo', collection: @gallery.photos

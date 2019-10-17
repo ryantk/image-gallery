@@ -10,12 +10,13 @@ blocks:
       prologue:
         commands:
           - checkout
-
           - sem-service start mongodb
           - sudo apt install mongodb-clients -y
-          - echo 'db.createUser( {user:"username", pwd:"password", roles:[], mechanisms:["SCRAM-SHA-1"]  } )' | mongo s2
-
+          - >-
+            echo 'db.createUser( {user:"username", pwd:"password", roles:[],
+            mechanisms:["SCRAM-SHA-1"]  } )' | mongo s2
           - bundle install
+          - npm i
       jobs:
         - name: rspec
           commands:
